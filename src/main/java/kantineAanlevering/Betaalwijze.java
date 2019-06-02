@@ -1,4 +1,4 @@
-package KantineAanlevering;
+package kantineAanlevering;
 
 public abstract class Betaalwijze {
 

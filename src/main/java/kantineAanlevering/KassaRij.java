@@ -1,4 +1,4 @@
-package KantineAanlevering;
+package kantineAanlevering;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

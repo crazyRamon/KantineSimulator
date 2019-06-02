@@ -1,4 +1,4 @@
-package KantineAanlevering;
+package kantineAanlevering;
 
 public class Contant extends Betaalwijze {
     /**

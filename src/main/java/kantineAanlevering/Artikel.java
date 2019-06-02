@@ -1,3 +1,4 @@
+package kantineAanlevering;
 public class Artikel {
 	
 	private String naam;

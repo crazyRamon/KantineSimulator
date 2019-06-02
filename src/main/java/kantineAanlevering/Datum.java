@@ -1,4 +1,4 @@
-package KantineAanlevering;
+package kantineAanlevering;
 
 public class Datum {
 
@@ -68,7 +68,7 @@ public class Datum {
 	 */
 	public String getDatumAsString() {
 		// TODO
-		return "";
+		return "placeholder";
 	}	
 
 	public int getDag() {
