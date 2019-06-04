@@ -1,15 +1,15 @@
 package kantineAanlevering;
 
-public class KantineSimulatie {
+public class KantineSimulatie_1 {
 
-    private Kantine kantine;
+    private static Kantine kantine;
 
     public static final int DAGEN = 7;
 
     /**
      * Constructor
      */
-    public KantineSimulatie() {
+    public KantineSimulatie_1() {
         kantine = new Kantine();
     }
 
@@ -20,23 +20,31 @@ public class KantineSimulatie {
      * @param dagen
      */
     public void simuleer(int dagen) {
+    	
+    	String[] artikels = {"Appel", "Peer"};
 
-        // herhaal voor elke dag
-        for(int i = 0; ...) {
+        for(int i = 0; i < dagen; i++) {
 
             // per dag nu even vast 10 + i personen naar binnen
             // laten gaan, wordt volgende week veranderd...
 
             // for lus voor personen
             for(int j = 0; j < 10 + i; j++){
-                // kantine.(...);
+                kantine.loopPakSluitAan(new Persoon(), artikels);
             }
 
             // verwerk rij voor de kassa
+            
+            kantine.verwerkRijVoorKassa();
 
             // toon dagtotalen (artikelen en geld in kassa)
+            
+            System.out.println("Aantal artikelen: " + kantine.aantalArtikelen());
+            System.out.println("Omzet: €" + String.format("%.2f",kantine.hoeveelheidGeldInKassa()));
 
             // reset de kassa voor de volgende dag
+            
+            kantine.resetKassa();
         }
     }
 
@@ -51,7 +59,7 @@ public class KantineSimulatie {
         } else {
             dagen = Integer.parseInt(args[0]);
         }
-
-        simulate(dagen);
+        KantineSimulatie_1 sim = new KantineSimulatie_1();
+        sim.simuleer(dagen);
     }
 }

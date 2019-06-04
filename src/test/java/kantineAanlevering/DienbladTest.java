@@ -8,7 +8,9 @@ class DienbladTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		Dienblad dienblad = new Dienblad();
+		Artikel artikel = new Artikel("Appel", 1.50);
+		dienblad.voegToe(artikel);
 	}
 
 }

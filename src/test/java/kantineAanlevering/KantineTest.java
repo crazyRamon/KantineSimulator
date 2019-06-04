@@ -8,7 +8,8 @@ class KantineTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		Kantine kantine = new Kantine();
+		kantine.loopPakSluitAan();
 	}
 
 }

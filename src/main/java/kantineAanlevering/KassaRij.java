@@ -5,13 +5,14 @@ import java.util.LinkedList;
 
 public class KassaRij {
 	
-	private ArrayList<Dienblad> rij;
+	private LinkedList<Dienblad> rij = new LinkedList<>();
 
     /**
      * Constructor
+     * Maakt een rij aan
      */
     public KassaRij() {
-        // method body omitted
+    	
     }
 
     /**
@@ -20,7 +21,7 @@ public class KassaRij {
      * @param klant
      */
     public void sluitAchteraan(Dienblad klant) {
-        this.rij.add(klant);
+        this.rij.addLast(klant);
     }
 
     /**
@@ -30,9 +31,24 @@ public class KassaRij {
      *
      * @return Eerste klant in de rij of null
      */
+    public Dienblad verwijderEerstePersoonInRij() {
+        if(erIsEenRij()) {
+        	return this.rij.removeFirst();
+        } else {
+        	return null;
+        }
+    }
+    
+    /**
+     * Indien er een rij bestaat, de eerste klant uit
+     * de rij retourneren.
+     * Als er niemand in de rij staat geeft deze null terug.
+     *
+     * @return Eerste klant in de rij of null
+     */
     public Dienblad eerstePersoonInRij() {
         if(erIsEenRij()) {
-        	return this.rij.get(0);
+        	return this.rij.getFirst();
         } else {
         	return null;
         }

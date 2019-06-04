@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class Dienblad {
 	
-    private ArrayList<Artikel> artikelen;
+    private Stack<Artikel> artikelen = new Stack<>();
     private Persoon klant;
 
     /**
@@ -31,7 +31,7 @@ public class Dienblad {
      * @param artikel
      */
     public void voegToe(Artikel artikel) {
-        this.artikelen.add(artikel);
+        this.artikelen.push(artikel);
     }
 
     /**
@@ -63,6 +63,10 @@ public class Dienblad {
         	totaalprijs += artikel.getPrijs();
         }
         return totaalprijs;
+    }
+    
+    public Iterator<Artikel> getArtikelIterator() {
+    	return artikelen.iterator();
     }
     
     public int getKlantBsn() {

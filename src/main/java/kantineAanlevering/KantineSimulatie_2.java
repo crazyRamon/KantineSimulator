@@ -2,7 +2,7 @@ package kantineAanlevering;
 
 import java.util.*;
 
-public class KantineSimulatie {
+public class KantineSimulatie_2 {
 
     // kantine
     private Kantine kantine;
@@ -34,12 +34,15 @@ public class KantineSimulatie {
     // minimum en maximum artikelen per persoon
     private static final int MIN_ARTIKELEN_PER_PERSOON = 1;
     private static final int MAX_ARTIKELEN_PER_PERSOON = 4;
+    
+    //aantal dagen van de simulatie
+    public static final int DAGEN = 7;
 
     /**
      * Constructor
      *
      */
-    public KantineSimulatie() {
+    public KantineSimulatie_2() {
         kantine = new Kantine();
         random = new Random();
         int[] hoeveelheden = getRandomArray(
@@ -49,7 +52,7 @@ public class KantineSimulatie {
         kantineaanbod = new KantineAanbod(
             artikelnamen, artikelprijzen, hoeveelheden);
 
-        kantine.setKantineAanbod(kantineaanbod);
+        kantine.setAanbod(kantineaanbod);
     }
 
     /**
@@ -73,6 +76,7 @@ public class KantineSimulatie {
     /**
      * Methode om een random getal tussen min(incl)
      * en max(incl) te genereren.
+     * + 1 want standaard bagint nextInt() vanaf 1 maar je wilt 0 als minimale waarde als min = 0;
      *
      * @param min
      * @param max
@@ -111,18 +115,18 @@ public class KantineSimulatie {
         for(int i = 0; i < dagen; i++) {
 
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = ... ;
+            int aantalpersonen = getRandomValue(3, 20) ;
 
             // laat de personen maar komen...
             for(int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
-                int aantalartikelen = ... ;
+                int aantalartikelen = getRandomValue(1, 5) ;
 
                 // genereer de "artikelnummers", dit zijn indexen
                 // van de artikelnamen
-                array int[] tepakken = getRandomArray(
+                int[] tepakken = getRandomArray(
                     aantalartikelen, 0, AANTAL_ARTIKELEN-1);
 
                 // vind de artikelnamen op basis van
@@ -131,17 +135,39 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
+                
+                kantine.loopPakSluitAan(new Persoon(), artikelen);
 
             }
 
             // verwerk rij voor de kassa
 
+            kantine.verwerkRijVoorKassa();
+            
             // druk de dagtotalen af en hoeveel personen binnen
 
-            // zijn gekomen
+            // zijn gekomen            
+
+            System.out.println("Aantal artikelen: " + kantine.aantalArtikelen());
+            System.out.println("Omzet: €" + String.format("%.2f",kantine.hoeveelheidGeldInKassa()));
+            System.out.println("Aantal klanten: " + kantine.aantalKlanten());
+            System.out.println();
 
             // reset de kassa voor de volgende dag
 
+            kantine.resetKassa();
         }
+    }
+    
+    public static void main(String[] args) {
+        int dagen;
+
+        if (args.length == 0) {
+            dagen = DAGEN;
+        } else {
+            dagen = Integer.parseInt(args[0]);
+        }
+        KantineSimulatie_2 sim = new KantineSimulatie_2();
+        sim.simuleer(dagen);
     }
 }

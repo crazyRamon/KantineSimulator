@@ -2,7 +2,7 @@ package kantineAanlevering;
 public class Artikel {
 	
 	private String naam;
-	private float prijs;
+	private double prijs;
 	
 	/**
 	 * Cunstructor
@@ -10,7 +10,7 @@ public class Artikel {
 	 * @param naam
 	 * @param prijs
 	 */
-	public Artikel(String naam, float prijs) {
+	public Artikel(String naam, double prijs) {
 		this.naam = naam;
 		this.prijs = prijs;
 	}
@@ -24,7 +24,7 @@ public class Artikel {
 		return naam;
 	}
 	
-	public float getPrijs() {
+	public double getPrijs() {
 		return prijs;
 	}
 	

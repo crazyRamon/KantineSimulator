@@ -3,14 +3,14 @@ package kantineAanlevering;
 public class Kantine {
 
     private Kassa kassa;
-    private KassaRij kassarij;
+    private KantineAanbod aanbod;
 
-    /**
+	/**
      * Constructor
      */
     public Kantine() {
-        kassarij = new KassaRij();
-        kassa = new Kassa(kassarij);
+        KassaRij kassarij = new KassaRij();
+        this.kassa = new Kassa(kassarij);
     }
 
     /**
@@ -19,16 +19,23 @@ public class Kantine {
      * en plaats deze op het dienblad. Tenslotte sluit de
      * Persoon zich aan bij de rij voor de kassa.
      */
-    public void loopPakSluitAan() {
-        // method body omitted
+    public void loopPakSluitAan(Persoon persoon, String[] artikelnaam) {
+        Dienblad klant = new Dienblad(persoon);
+        //Artikel appel = new Artikel("Appel", 0.00);
+        for(String naam : artikelnaam) {
+        	klant.voegToe(new Artikel(naam, 1.00));
+        }
+        this.kassa.getKassaRij().sluitAchteraan(klant);
     }
 
     /**
      * Deze methode handelt de rij voor de kassa af.
+     * Dit kan beter in een while loop omdat die elke keer kijkt of er nog iemand in de rij staat.
+     * Wanneer er een for gebruikt wordt, wordt er maar één keer naar gekeken.
      */
     public void verwerkRijVoorKassa() {
-        while() {
-            // omitted
+        while(kassa.getKassaRij().erIsEenRij()) {
+            this.kassa.rekenAf(this.kassa.getKassaRij().verwijderEerstePersoonInRij());
         }
     }
 
@@ -38,7 +45,7 @@ public class Kantine {
      * @return hoeveelheid geld in kassa
      */
     public double hoeveelheidGeldInKassa() {
-       // method body omitted
+       return this.kassa.geldInKassa;
     }
 
     /**
@@ -47,7 +54,16 @@ public class Kantine {
      * @return het aantal gepasseerde artikelen
      */
     public int aantalArtikelen() {
-        // method body omitted
+        return this.kassa.aantalArtikelen;
+    }
+    
+    /**
+     * Deze methode geeft het aantal gepasseerde klanten.
+     *
+     * @return het aantal gepasseerde klanten
+     */
+    public int aantalKlanten() {
+        return this.kassa.totDagKlanten;
     }
 
     /**
@@ -55,6 +71,14 @@ public class Kantine {
      * het aantal artikelen en "leegt" de inhoud van de kassa.
      */
     public void resetKassa() {
-        // method body omitted
+        this.kassa.resetKassa();
     }
+
+    public KantineAanbod getAanbod() {
+		return aanbod;
+	}
+
+	public void setAanbod(KantineAanbod aanbod) {
+		this.aanbod = aanbod;
+	}
 }
