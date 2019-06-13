@@ -23,7 +23,7 @@ public class Kantine {
         Dienblad klant = new Dienblad(persoon);
         //Artikel appel = new Artikel("Appel", 0.00);
         for(String naam : artikelnaam) {
-        	klant.voegToe(new Artikel(naam, 1.00));
+        	klant.voegToe(new Artikel(naam, aanbod.getArtikel(naam).getPrijs()));
         }
         this.kassa.getKassaRij().sluitAchteraan(klant);
     }

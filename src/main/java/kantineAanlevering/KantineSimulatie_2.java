@@ -12,6 +12,10 @@ public class KantineSimulatie_2 {
 
     // random generator
     private Random random;
+    
+    //dag statestieken opslaan
+    ArrayList<Double> dagOmzet = new ArrayList<>();
+    ArrayList<Integer> dagAfzet = new ArrayList<>();
 
     // aantal artikelen
     private static final int AANTAL_ARTIKELEN = 4;
@@ -36,7 +40,7 @@ public class KantineSimulatie_2 {
     private static final int MAX_ARTIKELEN_PER_PERSOON = 4;
     
     //aantal dagen van de simulatie
-    public static final int DAGEN = 7;
+    public static final int DAGEN = 14;
 
     /**
      * Constructor
@@ -115,8 +119,8 @@ public class KantineSimulatie_2 {
         for(int i = 0; i < dagen; i++) {
 
             // bedenk hoeveel personen vandaag binnen lopen
-            //int aantalpersonen = getRandomValue(3, 20);
-            int aantalKlanten = 100;
+            int aantalKlanten = getRandomValue(0, 100);
+            //int aantalKlanten = get100;
 
             // laat de personen maar komen...
             for(int j = 0; j < aantalKlanten; j++) {
@@ -124,11 +128,11 @@ public class KantineSimulatie_2 {
             	int waarde = random.nextInt(100);
             	Persoon klant = null;
             	
-            	if(waarde <= 1) {
+            	if(waarde < 1) {
             		klant = new Kantinemedewerker();
-            	} else if(waarde <= 10) {
+            	} else if(waarde < 10) {
             		klant = new Docent();
-            	} else if(waarde <= 100) {
+            	} else if(waarde < 100) {
             		klant = new Student();
             	}
             	            	            	
@@ -156,12 +160,15 @@ public class KantineSimulatie_2 {
 
             kantine.verwerkRijVoorKassa();
             
+            //voeg dagomzet en dagafzet toe
+            dagOmzet.add(kantine.hoeveelheidGeldInKassa());
+            dagAfzet.add(kantine.aantalArtikelen());
+            
             // druk de dagtotalen af en hoeveel personen binnen
-
-            // zijn gekomen            
+            // zijn gekomen
 
             System.out.println("Aantal artikelen: " + kantine.aantalArtikelen());
-            System.out.println("Omzet: €" + String.format("%.2f",kantine.hoeveelheidGeldInKassa()));
+            System.out.println("Omzet: €" + String.format("%.2f", kantine.hoeveelheidGeldInKassa()));
             System.out.println("Aantal klanten: " + kantine.aantalKlanten());
             System.out.println();
 
@@ -169,6 +176,19 @@ public class KantineSimulatie_2 {
 
             kantine.resetKassa();
         }
+        
+        System.out.println("Gemiddelde dagomzet: €" + String.format("%.2f",Administratie.berekenGemiddeldeOmzet(dagOmzet)));
+        System.out.println("Gemiddelde dagafzet: " + Math.round(Administratie.berekenGemiddeldAantal(dagAfzet)));
+        System.out.println();
+        System.out.println("Totaal dagomzet per weekdag");
+        double[] weekdagOmzet = Administratie.berekenDagOmzet(dagOmzet);
+        System.out.println("Maandag: €" + String.format("%.2f", weekdagOmzet[0]));
+        System.out.println("Dinsdag: €" + String.format("%.2f", weekdagOmzet[1]));
+        System.out.println("Woensdag: €" + String.format("%.2f", weekdagOmzet[2]));
+        System.out.println("Donderdag: €" + String.format("%.2f", weekdagOmzet[3]));
+        System.out.println("Vrijdag: €" + String.format("%.2f", weekdagOmzet[4]));
+        System.out.println("Zaterdag: €" + String.format("%.2f", weekdagOmzet[5]));
+        System.out.println("Zondag: €" + String.format("%.2f", weekdagOmzet[6]));
     }
     
     public static void main(String[] args) {

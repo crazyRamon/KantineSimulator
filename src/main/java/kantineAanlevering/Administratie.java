@@ -1,5 +1,6 @@
 package kantineAanlevering;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Administratie {
@@ -15,12 +16,13 @@ public class Administratie {
      * @param aantal
      * @return het gemiddelde
      */
-    public static double berekenGemiddeldAantal(int[] aantal) {
+    public static double berekenGemiddeldAantal(ArrayList<Integer> aantal) {
+    	if(aantal.size() == 0) return 0;
     	int sum = 0;
-        for(int i = 0; i < aantal.length; i++) {
-        	sum += aantal[i];
+        for(int i = 0; i < aantal.size(); i++) {
+        	sum += aantal.get(i);
         }
-        double average = (double)sum / aantal.length;
+        double average = (double)sum / aantal.size();
         return average;
     }
 
@@ -30,12 +32,13 @@ public class Administratie {
      * @param omzet
      * @return het gemiddelde
      */
-    public static double berekenGemiddeldeOmzet(double[] omzet) {
+    public static double berekenGemiddeldeOmzet(ArrayList<Double> omzet) {
+    	if(omzet.size() == 0) return 0;
     	double sum = 0;
-        for(int i = 0; i < omzet.length; i++) {
-        	sum += omzet[i];
+        for(int i = 0; i < omzet.size(); i++) {
+        	sum += omzet.get(i);
         }
-        double average = sum / omzet.length;
+        double average = sum / omzet.size();
         return average;
     }
 
@@ -46,12 +49,12 @@ public class Administratie {
      * @return array (7 elementen) met dagomzetten
      */
 
-    public static double[] berekenDagOmzet(double[] omzet) {
+    public static double[] berekenDagOmzet(ArrayList<Double> omzet) {
         double[] temp = new double[DAYS_IN_WEEK];
         for(int i = 0; i < DAYS_IN_WEEK; i++) {        	
             int j = 0;
-            while(omzet.length - j * DAYS_IN_WEEK > i) {
-                temp[i] += omzet[i + DAYS_IN_WEEK * j];
+            while(omzet.size() - j * DAYS_IN_WEEK > i) {
+                temp[i] += omzet.get(i + DAYS_IN_WEEK * j);
                 j++;
             }
         }
