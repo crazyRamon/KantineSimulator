@@ -115,12 +115,24 @@ public class KantineSimulatie_2 {
         for(int i = 0; i < dagen; i++) {
 
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = getRandomValue(3, 20) ;
+            //int aantalpersonen = getRandomValue(3, 20);
+            int aantalKlanten = 100;
 
             // laat de personen maar komen...
-            for(int j = 0; j < aantalpersonen; j++) {
-
-                // maak persoon en dienblad aan, koppel ze
+            for(int j = 0; j < aantalKlanten; j++) {
+            	
+            	int waarde = random.nextInt(100);
+            	Persoon klant = null;
+            	
+            	if(waarde <= 1) {
+            		klant = new Kantinemedewerker();
+            	} else if(waarde <= 10) {
+            		klant = new Docent();
+            	} else if(waarde <= 100) {
+            		klant = new Student();
+            	}
+            	            	            	
+                // maak klant en dienblad aan, koppel ze
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalartikelen = getRandomValue(1, 5) ;
 
@@ -136,7 +148,7 @@ public class KantineSimulatie_2 {
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
                 
-                kantine.loopPakSluitAan(new Persoon(), artikelen);
+                kantine.loopPakSluitAan(klant, artikelen);
 
             }
 

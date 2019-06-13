@@ -1,7 +1,8 @@
 package kantineAanlevering;
 
-public class Persoon {
+public abstract class Persoon {
 
+	private String type;
 	private int bsn;
 	private String voornaam;
 	private String achternaam;
@@ -17,7 +18,7 @@ public class Persoon {
 	 * @param geboortedatum geboortedatum in dd-mm-jjjj
 	 * @param geslacht geslacht (M/V)
 	 */
-	public Persoon(int bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
+	public Persoon(String type, int bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
 		this.bsn = bsn;
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;		
@@ -26,6 +27,16 @@ public class Persoon {
 	}
 	
 	public Persoon() {
+		type = "onbekend";
+		bsn = 0;
+		voornaam = "";
+		achternaam = "";
+		geboortedatum = new Datum();
+		geslacht = 'O';
+	}
+	
+	public Persoon(String type) {
+		this.type = type;
 		bsn = 0;
 		voornaam = "";
 		achternaam = "";
@@ -88,9 +99,18 @@ public class Persoon {
 		}
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return "BSN: " + this.getBsn() + 
+		return "Type: " + this.getType() +
+				" BSN: " + this.getBsn() + 
 				" Voornaam: " + this.getVoornaam() + 
 				" Achternaam: " + this.getAchternaam() +
 				" Geboortedatum: " + this.getGeboortedatum() +

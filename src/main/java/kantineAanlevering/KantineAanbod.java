@@ -7,6 +7,7 @@ public class KantineAanbod {
     private HashMap<String, ArrayList<Artikel>> aanbod;
     private HashMap<String, Integer> startVoorraad;
     private HashMap<String, Double> prijzen;
+    private int minimumvoorraad = 10;
     
     /**
      * Constructor. Het eerste argument is een lijst met artikelnamen,
@@ -65,9 +66,9 @@ public class KantineAanbod {
         }
         else 
         {
-            Artikel a=stapel.get(0);
+            Artikel a = stapel.get(0);
             stapel.remove(0);
-            if(stapel.size()<=10)vulVoorraadAan(a.getNaam());
+            if(stapel.size()<=minimumvoorraad) vulVoorraadAan(a.getNaam());
             return a;
         }
     }
@@ -79,6 +80,7 @@ public class KantineAanbod {
      * @return artikel (of null)
      */
     public Artikel getArtikel(String productnaam) {
-        return getArtikel(getArrayList(productnaam));
+    	Artikel artikel = getArtikel(getArrayList(productnaam));
+        return artikel;
     }
 }

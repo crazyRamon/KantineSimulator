@@ -1,15 +1,27 @@
 package kantineAanlevering;
 
-public class Administratie {
+import java.util.Arrays;
 
-    /**
+public class Administratie {
+	
+	private final static int DAYS_IN_WEEK = 7;
+
+    private Administratie() {    	
+    }
+	
+	/**
      * Deze methode berekent van de int array aantal de gemiddelde waarde
      *
      * @param aantal
      * @return het gemiddelde
      */
-    public double berekenGemiddeldAantal(int[] aantal) {
-        // method body omitted
+    public static double berekenGemiddeldAantal(int[] aantal) {
+    	int sum = 0;
+        for(int i = 0; i < aantal.length; i++) {
+        	sum += aantal[i];
+        }
+        double average = (double)sum / aantal.length;
+        return average;
     }
 
     /**
@@ -18,8 +30,13 @@ public class Administratie {
      * @param omzet
      * @return het gemiddelde
      */
-    public double berekenGemiddeldeOmzet(double[] omzet) {
-        // method body omitted
+    public static double berekenGemiddeldeOmzet(double[] omzet) {
+    	double sum = 0;
+        for(int i = 0; i < omzet.length; i++) {
+        	sum += omzet[i];
+        }
+        double average = sum / omzet.length;
+        return average;
     }
 
     /**
@@ -30,15 +47,12 @@ public class Administratie {
      */
 
     public static double[] berekenDagOmzet(double[] omzet) {
-        double[] temp = new double[7];
-        for(int i = 0; i < 7; i++) {
-
+        double[] temp = new double[DAYS_IN_WEEK];
+        for(int i = 0; i < DAYS_IN_WEEK; i++) {        	
             int j = 0;
-            while( ... ) {
-                temp[i] += omzet[i + 7 * j];
-
-                // omitted
-
+            while(omzet.length - j * DAYS_IN_WEEK > i) {
+                temp[i] += omzet[i + DAYS_IN_WEEK * j];
+                j++;
             }
         }
         return temp;
