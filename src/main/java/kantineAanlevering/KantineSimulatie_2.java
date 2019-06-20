@@ -127,14 +127,14 @@ public class KantineSimulatie_2 {
             // laat de klanten maar komen...
             for(int j = 0; j < aantalKlanten; j++) {
             	
-            	int waarde = random.nextInt(100);
+            	int randomPercentage = random.nextInt(100);
             	Persoon klant = null;
             	
-            	if(waarde < 1) {
+            	if(randomPercentage < 1) {
             		klant = new Kantinemedewerker(1007, true, 1234567890, "Ramon", "Kits", new Datum(1, 12, 1999), 'M');
-            	} else if(waarde < 10) {
+            	} else if(randomPercentage < 10) {
             		klant = new Docent("ICT", 1234567890, "Ramon", "Kits", new Datum(1, 12, 1999), 'M');
-            	} else if(waarde < 100) {
+            	} else if(randomPercentage < 100) {
             		klant = new Student(389517, "HBO-ICT", 1234567890, "Ramon", "Kits", new Datum(1, 12, 1999), 'M');
             	}
             	            	            	
