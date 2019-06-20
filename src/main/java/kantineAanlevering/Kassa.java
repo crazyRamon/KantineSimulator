@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public class Kassa {
 
-	public int aantalArtikelen;
+	public int aantalDagArtikelen;
 	public double geldInKassa;	
 	public int totDagKlanten;	
 	private KassaRij kassaRij;
@@ -23,15 +23,39 @@ public class Kassa {
      * de kassa worden bijgehouden. De implementatie wordt
      * later vervangen door een echte betaling door de persoon.
      *
-     * @param klant die moet afrekenen
+     * @param dienblad die afgerekend moet worden
+     * @throws TeWeinigGeldException 
      */
-    public void rekenAf(Dienblad klant) {
-        Iterator<Artikel> it = klant.getArtikelIterator();
+    public void rekenAf(Dienblad dienblad) throws TeWeinigGeldException {
+        Iterator<Artikel> it = dienblad.getArtikelIterator();
+        double totaalbedrag = 0;
+        int aantalArtikelen = 0;
         while(it.hasNext()) {
         	Artikel artikel = it.next();
-        	geldInKassa += artikel.getPrijs();
+        	totaalbedrag += artikel.getPrijs();
         	aantalArtikelen++;
         }
+        
+        //kijkt of een klant een kortingskaart heeft, genereerd de korting en haalt deze van het totaalBedrag af
+        if(dienblad.getKlant() instanceof KortingskaartHouder) {
+        	KortingskaartHouder kortingskaartHouder = (KortingskaartHouder)dienblad.getKlant();
+        	double korting = totaalbedrag * (kortingskaartHouder.geefKortingsPercentage());
+        	if(kortingskaartHouder.heeftMaximum() && korting > 1) korting = 1;
+        	totaalbedrag -= korting;
+        }
+        
+        //Als de klant genoeg saldo heeft kan hij/zij afrekenen
+        dienblad.getKlant().setBetaalwijze(new Pinpas());
+        /** if(!dienblad.getKlant().getBetaalwijze().betaal(totaalbedrag)) {
+        	System.out.println("Klant " + totDagKlanten + " heeft te weinig saldo. €" + dienblad.getKlant().getBetaalwijze().getSaldo() + " v/d €" + totaalbedrag);
+        } else {
+	        geldInKassa += totaalbedrag;
+	        aantalDagArtikelen += aantalArtikelen;	        
+        } */
+        dienblad.getKlant().getBetaalwijze().betaal(totaalbedrag, dienblad.getKlant());
+        geldInKassa += totaalbedrag;
+        aantalDagArtikelen += aantalArtikelen;
+        
         totDagKlanten++;
     }
 
@@ -41,8 +65,8 @@ public class Kassa {
      *
      * @return aantal artikelen
      */
-    public int aantalArtikelen() {
-        return aantalArtikelen;
+    public int aantalDagArtikelen() {
+        return aantalDagArtikelen;
     }
 
     /**
@@ -61,7 +85,7 @@ public class Kassa {
      * de totale hoeveelheid geld in de kassa.
      */
     public void resetKassa() {
-        aantalArtikelen = 0;
+        aantalDagArtikelen = 0;
         geldInKassa = 0;
         totDagKlanten = 0;
     }

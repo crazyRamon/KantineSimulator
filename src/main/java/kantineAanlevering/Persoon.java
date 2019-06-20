@@ -2,12 +2,13 @@ package kantineAanlevering;
 
 public abstract class Persoon {
 
-	private String type;
+	protected String type;
 	private int bsn;
 	private String voornaam;
 	private String achternaam;
 	private Datum geboortedatum;
 	private char geslacht;
+	private Betaalwijze betaalwijze;
 		
 	/**
 	 * Constructor
@@ -43,6 +44,8 @@ public abstract class Persoon {
 		geboortedatum = new Datum();
 		geslacht = 'O';
 	}
+	
+	public abstract String getType();
 
 	public int getBsn() {
 		return bsn;
@@ -98,23 +101,16 @@ public abstract class Persoon {
 			this.geslacht = 'O';
 		}
 	}
-	
-	public String getType() {
-		return type;
+
+	public Betaalwijze getBetaalwijze() {
+		return betaalwijze;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setBetaalwijze(Betaalwijze betaalwijze) {
+		this.betaalwijze = betaalwijze;
 	}
 
 	@Override
-	public String toString() {
-		return "Type: " + this.getType() +
-				" BSN: " + this.getBsn() + 
-				" Voornaam: " + this.getVoornaam() + 
-				" Achternaam: " + this.getAchternaam() +
-				" Geboortedatum: " + this.getGeboortedatum() +
-				" Geslacht: " + this.getGeslacht();
-	}
+	public abstract String toString();
 	
 }

@@ -51,7 +51,11 @@ public class Dienblad {
     	this.klant = klant;
     }
 
-    /**
+    public Persoon getKlant() {
+		return klant;
+	}
+
+	/**
      * Methode om de totaalprijs van de artikelen
      * op dienblad uit te rekenen
      *

@@ -35,11 +35,16 @@ public class KantineSimulatie_1 {
 
             // verwerk rij voor de kassa
             
-            kantine.verwerkRijVoorKassa();
+            try {
+				kantine.verwerkRijVoorKassa();
+			} catch (TeWeinigGeldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
             // toon dagtotalen (artikelen en geld in kassa)
             
-            System.out.println("Aantal artikelen: " + kantine.aantalArtikelen());
+            System.out.println("Aantal artikelen: " + kantine.aantalDagArtikelen());
             System.out.println("Omzet: €" + String.format("%.2f",kantine.hoeveelheidGeldInKassa()));
 
             // reset de kassa voor de volgende dag

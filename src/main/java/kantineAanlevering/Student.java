@@ -5,14 +5,14 @@ public class Student extends Persoon {
 	private int studentennummer;
 	private String studierichting;
 
-	public Student(int bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
+	public Student(int studentennummer, String studierichting, int bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
 		super("Student", bsn, voornaam, achternaam, geboortedatum, geslacht);
-		// TODO Auto-generated constructor stub
+		this.studentennummer = studentennummer;
+		this.studierichting = studierichting;
 	}
 
 	public Student() {
 		super("Student");
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getStudentennummer() {
@@ -29,6 +29,23 @@ public class Student extends Persoon {
 
 	public void setStudierichting(String studierichting) {
 		this.studierichting = studierichting;
+	}
+	
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public String toString() {
+		return "Type: " + this.type +
+				" Studentennummer: " + this.getStudentennummer() + 
+				" Studierichting: " + this.getStudierichting() + 
+				" BSN: " + this.getBsn() + 
+				" Voornaam: " + this.getVoornaam() + 
+				" Achternaam: " + this.getAchternaam() +
+				" Geboortedatum: " + this.getGeboortedatum() +
+				" Geslacht: " + this.getGeslacht();
 	}
 
 }

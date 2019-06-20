@@ -32,8 +32,9 @@ public class Kantine {
      * Deze methode handelt de rij voor de kassa af.
      * Dit kan beter in een while loop omdat die elke keer kijkt of er nog iemand in de rij staat.
      * Wanneer er een for gebruikt wordt, wordt er maar één keer naar gekeken.
+     * @throws TeWeinigGeldException 
      */
-    public void verwerkRijVoorKassa() {
+    public void verwerkRijVoorKassa() throws TeWeinigGeldException {
         while(kassa.getKassaRij().erIsEenRij()) {
             this.kassa.rekenAf(this.kassa.getKassaRij().verwijderEerstePersoonInRij());
         }
@@ -53,8 +54,8 @@ public class Kantine {
      *
      * @return het aantal gepasseerde artikelen
      */
-    public int aantalArtikelen() {
-        return this.kassa.aantalArtikelen;
+    public int aantalDagArtikelen() {
+        return this.kassa.aantalDagArtikelen;
     }
     
     /**

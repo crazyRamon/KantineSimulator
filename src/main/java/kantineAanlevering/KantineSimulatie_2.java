@@ -118,22 +118,24 @@ public class KantineSimulatie_2 {
         // for lus voor dagen
         for(int i = 0; i < dagen; i++) {
 
-            // bedenk hoeveel personen vandaag binnen lopen
+        	System.out.println("-----Dag " + (i + 1) + "-----");
+        	
+            // bedenk hoeveel klanten vandaag binnen lopen
             int aantalKlanten = getRandomValue(0, 100);
             //int aantalKlanten = get100;
 
-            // laat de personen maar komen...
+            // laat de klanten maar komen...
             for(int j = 0; j < aantalKlanten; j++) {
             	
             	int waarde = random.nextInt(100);
             	Persoon klant = null;
             	
             	if(waarde < 1) {
-            		klant = new Kantinemedewerker();
+            		klant = new Kantinemedewerker(1007, true, 1234567890, "Ramon", "Kits", new Datum(1, 12, 1999), 'M');
             	} else if(waarde < 10) {
-            		klant = new Docent();
+            		klant = new Docent("ICT", 1234567890, "Ramon", "Kits", new Datum(1, 12, 1999), 'M');
             	} else if(waarde < 100) {
-            		klant = new Student();
+            		klant = new Student(389517, "HBO-ICT", 1234567890, "Ramon", "Kits", new Datum(1, 12, 1999), 'M');
             	}
             	            	            	
                 // maak klant en dienblad aan, koppel ze
@@ -158,16 +160,20 @@ public class KantineSimulatie_2 {
 
             // verwerk rij voor de kassa
 
-            kantine.verwerkRijVoorKassa();
+            try {
+				kantine.verwerkRijVoorKassa();
+			} catch (TeWeinigGeldException e) {
+				e.printStackTrace();
+			}
             
             //voeg dagomzet en dagafzet toe
             dagOmzet.add(kantine.hoeveelheidGeldInKassa());
-            dagAfzet.add(kantine.aantalArtikelen());
+            dagAfzet.add(kantine.aantalDagArtikelen());
             
             // druk de dagtotalen af en hoeveel personen binnen
             // zijn gekomen
 
-            System.out.println("Aantal artikelen: " + kantine.aantalArtikelen());
+            System.out.println("Aantal artikelen: " + kantine.aantalDagArtikelen());
             System.out.println("Omzet: €" + String.format("%.2f", kantine.hoeveelheidGeldInKassa()));
             System.out.println("Aantal klanten: " + kantine.aantalKlanten());
             System.out.println();

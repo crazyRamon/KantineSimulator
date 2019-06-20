@@ -1,13 +1,14 @@
 package kantineAanlevering;
 
-public class Kantinemedewerker extends Persoon {
+public class Kantinemedewerker extends Persoon implements KortingskaartHouder {
 	
 	private int medewerkersnummer;
 	private boolean magAchterKassaStaan;
 
-	public Kantinemedewerker(int bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
+	public Kantinemedewerker(int medewerkersnummer, boolean magAchterKassaStaan, int bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
 		super("Kantinemedewerker", bsn, voornaam, achternaam, geboortedatum, geslacht);
-		// TODO Auto-generated constructor stub
+		this.medewerkersnummer = medewerkersnummer;
+		this.magAchterKassaStaan = magAchterKassaStaan;
 	}
 
 	public Kantinemedewerker() {
@@ -23,12 +24,44 @@ public class Kantinemedewerker extends Persoon {
 		this.medewerkersnummer = medewerkersnummer;
 	}
 
-	public boolean isMagAchterKassaStaan() {
+	public boolean getMagAchterKassaStaan() {
 		return magAchterKassaStaan;
 	}
 
 	public void setMagAchterKassaStaan(boolean magAchterKassaStaan) {
 		this.magAchterKassaStaan = magAchterKassaStaan;
+	}
+	
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public double geefKortingsPercentage() {
+		return 0.35;
+	}
+
+	@Override
+	public boolean heeftMaximum() {
+		return false;
+	}
+
+	@Override
+	public double geefMaximum() {
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Type: " + this.getType() +
+				" Medewerkersnummer: " + this.getMedewerkersnummer() + 
+				" MagAchterKassaStaan: " + this.getMagAchterKassaStaan() + 
+				" BSN: " + this.getBsn() + 
+				" Voornaam: " + this.getVoornaam() + 
+				" Achternaam: " + this.getAchternaam() +
+				" Geboortedatum: " + this.getGeboortedatum() +
+				" Geslacht: " + this.getGeslacht();
 	}
 	
 }
